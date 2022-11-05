@@ -12,7 +12,7 @@ This Terraform module can be run to manage a test/demo Zimagi instance in the GC
  2. Add GCP project name as Terraform variable
 
  ```bash
-$> echo 'gcp_project = "{project name}"' > terraform.tfvars
+$> echo 'project = "{project name}"' > terraform.tfvars
  ```
   3. Add any other variable overrides you like _(see variables.tf)_
   4. Login to GCP environment

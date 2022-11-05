@@ -1,21 +1,25 @@
 
-variable "gcp_project" {
+variable "project" {
   description = "GCP project name"
 }
-variable "gcp_region" {
+variable "credentials" {
+  description = "GCP service account credentials file in JSON format (needs ability to create networking, firewalls, and compute instances)"
+  default = null
+}
+
+variable "region" {
   description = "GCP region, e.g. us-east1"
   default     = "us-east1"
 }
-
-variable "gcp_vpc_name" {
+variable "vpc_name" {
   description = "VPC name"
   default     = "zimagi-test"
 }
-variable "gcp_subnet_name" {
+variable "subnet_name" {
   description = "VPC subnet name"
   default     = "public"
 }
-variable "gcp_subnet_cidr" {
+variable "subnet_cidr" {
   description = "VPC subnet CIDR"
   default     = "10.1.0.0/24"
 }
