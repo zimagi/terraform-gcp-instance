@@ -9,12 +9,14 @@ data "template_file" "startup_script" {
 }
 
 resource "google_compute_instance" "zimagi" {
-  name         = var.instance_name
-  machine_type = var.machine_type
-  zone         = data.google_compute_zones.available.names[0]
+  name           = var.instance_name
+  machine_type   = var.machine_type
+  zone           = data.google_compute_zones.available.names[0]
 
-  tags         = ["allow-ssh", "allow-command-api", "allow-data-api"]
-  labels       = var.labels
+  desired_status = var.active ? "RUNNING" : "TERMINATED"
+
+  tags           = ["allow-ssh", "allow-command-api", "allow-data-api"]
+  labels         = var.labels
 
   allow_stopping_for_update = true
 

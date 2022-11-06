@@ -7,6 +7,11 @@ variable "credentials" {
   default = null
 }
 
+variable "active" {
+  description = "Whether or not GCP instance is active"
+  default     = true
+}
+
 variable "region" {
   description = "GCP region, e.g. us-east1"
   default     = "us-east1"
