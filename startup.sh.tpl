@@ -35,8 +35,8 @@ apt-get install -y docker-ce >>"$INIT_LOG" 2>&1
 
 echo "Initializing Zimagi" | tee -a "$INIT_LOG"
 su - ${user} -c "git clone https://github.com/zimagi/zimagi.git ~/zimagi >>"$ZIMAGI_LOG" 2>&1"
-su - ${user} -c "~/zimagi/scripts/reactor init >>"$ZIMAGI_LOG" 2>&1"
-su -P - ${user} -c "~/zimagi/scripts/zimagi env get >>"$ZIMAGI_LOG" 2>&1"
+su - ${user} -c "~/zimagi/reactor init >>"$ZIMAGI_LOG" 2>&1"
+su -P - ${user} -c "~/zimagi/zimagi env get >>"$ZIMAGI_LOG" 2>&1"
 
-su - ${user} -c "echo 'source ~/zimagi/scripts/reactor' >> ~/.bashrc"
+su - ${user} -c "echo 'source ~/zimagi/reactor' >> ~/.bashrc"
 su - ${user} -c "echo 'Zimagi startup complete' >>"$ZIMAGI_LOG""
