@@ -30,7 +30,11 @@ resource "google_compute_instance" "zimagi" {
   }
 
   metadata = {
-    ssh-keys = "${var.instance_user}:${file(var.instance_ssh_key)}"
+    ssh-keys = (
+        fileexists(var.instance_ssh_key) ?
+        "${var.instance_user}:${file(var.instance_ssh_key)}" :
+        "${var.instance_user}:${var.instance_ssh_key}"
+      )
   }
 
    metadata_startup_script = "${data.template_file.startup_script.rendered}"
