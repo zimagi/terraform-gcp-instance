@@ -69,6 +69,11 @@ variable "data_api_port" {
   default     = "5323"
 }
 
+variable "environment" {
+  type = map(string)
+  default = {}
+}
+
 variable "labels" {
   type = map(string)
   default = {
