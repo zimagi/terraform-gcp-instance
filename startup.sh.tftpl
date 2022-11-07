@@ -10,6 +10,14 @@ apt-get upgrade >>"$INIT_LOG" 2>&1
 apt-get autoremove >>"$INIT_LOG" 2>&1
 
 
+echo "Setting Zimagi environment" | tee -a "$INIT_LOG"
+cat > /etc/profile.d/zimagi.sh <<EOF
+%{ for env_var, env_value in env }
+export ${env_var}="${env_value}"
+%{ endfor ~}
+EOF
+
+
 echo "Initializing user: ${user}" | tee -a "$INIT_LOG"
 useradd -m ${user} >>"$INIT_LOG" 2>&1
 groupadd -r docker >>"$INIT_LOG" 2>&1

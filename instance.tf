@@ -1,13 +1,6 @@
 
 data "google_compute_zones" "available" {}
 
-data "template_file" "startup_script" {
-  template = "${file("${path.module}/startup.sh.tpl")}"
-  vars     = {
-    user = var.instance_user
-  }
-}
-
 resource "google_compute_instance" "zimagi" {
   name           = var.instance_name
   machine_type   = var.machine_type
@@ -39,7 +32,10 @@ resource "google_compute_instance" "zimagi" {
       )
   }
 
-   metadata_startup_script = "${data.template_file.startup_script.rendered}"
+   metadata_startup_script = templatefile("${path.module}/startup.sh.tftpl", {
+      user = var.instance_user,
+      env = var.environment
+   })
 }
 
 resource "google_compute_disk" "os_disk" {
