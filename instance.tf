@@ -34,7 +34,8 @@ resource "google_compute_instance" "zimagi" {
 
    metadata_startup_script = templatefile("${path.module}/startup.sh.tftpl", {
       user = var.instance_user,
-      env = var.environment
+      env = var.environment,
+      development = var.development
    })
 }
 

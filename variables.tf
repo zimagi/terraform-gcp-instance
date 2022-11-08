@@ -11,6 +11,10 @@ variable "active" {
   description = "Whether or not GCP instance is active"
   default     = true
 }
+variable "development" {
+  description = "Whether or not to launch GCP instance in development mode (builds container images)"
+  default     = false
+}
 
 variable "region" {
   description = "GCP region, e.g. us-east1"

@@ -27,7 +27,7 @@ usermod -a -G docker ${user} >>"$INIT_LOG" 2>&1
 
 
 echo "Installing package dependencies" | tee -a "$INIT_LOG"
-apt-get install -y lsb-release ca-certificates apt-transport-https software-properties-common >>"$INIT_LOG" 2>&1
+apt-get install -y lsb-release ca-certificates apt-transport-https software-properties-common python3-pip >>"$INIT_LOG" 2>&1
 
 
 echo "Installing Git" | tee -a "$INIT_LOG"
@@ -42,9 +42,15 @@ apt-get install -y docker-ce >>"$INIT_LOG" 2>&1
 
 
 echo "Initializing Zimagi" | tee -a "$INIT_LOG"
-su - ${user} -c "git clone https://github.com/zimagi/zimagi.git ~/zimagi >>"$ZIMAGI_LOG" 2>&1"
-su - ${user} -c "~/zimagi/reactor init >>"$ZIMAGI_LOG" 2>&1"
-su -P - ${user} -c "~/zimagi/zimagi env get >>"$ZIMAGI_LOG" 2>&1"
+%{ if development }
+su - ${user} -c "git clone https://github.com/zimagi/zimagi.git ~/Zimagi >>"$ZIMAGI_LOG" 2>&1"
+su - ${user} -c "~/Zimagi/reactor init >>"$ZIMAGI_LOG" 2>&1"
+su -P - ${user} -c "~/Zimagi/zimagi env get >>"$ZIMAGI_LOG" 2>&1"
+su - ${user} -c "echo 'source ~/Zimagi/reactor' >> ~/.bashrc"
 
-su - ${user} -c "echo 'source ~/zimagi/reactor' >> ~/.bashrc"
-su - ${user} -c "echo 'Zimagi startup complete' >>"$ZIMAGI_LOG""
+%{ else }
+pip install zimagi >>"$ZIMAGI_LOG" 2>&1
+su -P - ${user} -c "zimagi env get >>"$ZIMAGI_LOG" 2>&1"
+
+%{ endif }
+echo 'Zimagi startup complete' | tee -a "$ZIMAGI_LOG"
