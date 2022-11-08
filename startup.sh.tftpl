@@ -45,12 +45,13 @@ echo "Initializing Zimagi" | tee -a "$INIT_LOG"
 %{ if development }
 su - ${user} -c "git clone https://github.com/zimagi/zimagi.git ~/Zimagi >>"$ZIMAGI_LOG" 2>&1"
 su - ${user} -c "~/Zimagi/reactor init >>"$ZIMAGI_LOG" 2>&1"
-su -P - ${user} -c "~/Zimagi/zimagi env get >>"$ZIMAGI_LOG" 2>&1"
 su - ${user} -c "echo 'source ~/Zimagi/reactor' >> ~/.bashrc"
+ZIMAGI_EXECUTABLE="~/Zimagi/zimagi"
 
 %{ else }
 pip install zimagi >>"$ZIMAGI_LOG" 2>&1
-su -P - ${user} -c "zimagi env get >>"$ZIMAGI_LOG" 2>&1"
+ZIMAGI_EXECUTABLE="zimagi"
 
 %{ endif }
+su -P - ${user} -c "$ZIMAGI_EXECUTABLE env get >>"$ZIMAGI_LOG" 2>&1"
 echo 'Zimagi startup complete' | tee -a "$ZIMAGI_LOG"
