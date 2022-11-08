@@ -50,6 +50,7 @@ ZIMAGI_EXECUTABLE="~/Zimagi/zimagi"
 
 %{ else }
 pip install zimagi >>"$ZIMAGI_LOG" 2>&1
+su -P - ${user} -c "zimagi env get >>"$ZIMAGI_LOG" 2>&1"
 ZIMAGI_EXECUTABLE="zimagi"
 
 %{ endif }
