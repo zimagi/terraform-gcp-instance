@@ -15,7 +15,7 @@ variable "development" {
   description = "Whether or not to launch GCP instance in development mode (builds container images)"
   default     = false
 }
-variable "version" {
+variable "reference" {
   description = "Git reference to provision on GCP instance (can be branch, tag, commit hash)"
   default     = "main"
 }

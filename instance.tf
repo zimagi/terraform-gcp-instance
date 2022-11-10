@@ -36,7 +36,7 @@ resource "google_compute_instance" "zimagi" {
       user = var.instance_user,
       env = var.environment,
       development = var.development,
-      version = var.version
+      version = var.reference
    })
 }
 
