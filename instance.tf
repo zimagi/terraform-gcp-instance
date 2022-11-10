@@ -15,7 +15,7 @@ resource "google_compute_instance" "zimagi" {
 
   boot_disk {
     source      = google_compute_disk.os_disk.name
-    auto_delete = true
+    auto_delete = false
   }
 
   network_interface {
