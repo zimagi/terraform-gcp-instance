@@ -15,7 +15,7 @@ resource "google_compute_instance" "zimagi" {
 
   boot_disk {
     source      = google_compute_disk.os_disk.name
-    auto_delete = false
+    auto_delete = true
   }
 
   network_interface {
@@ -35,7 +35,8 @@ resource "google_compute_instance" "zimagi" {
    metadata_startup_script = templatefile("${path.module}/startup.sh.tftpl", {
       user = var.instance_user,
       env = var.environment,
-      development = var.development
+      development = var.development,
+      version = var.version
    })
 }
 
