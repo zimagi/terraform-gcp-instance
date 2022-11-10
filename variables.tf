@@ -1,8 +1,8 @@
 
-variable "project" {
+variable "gcp_project" {
   description = "GCP project name"
 }
-variable "credentials" {
+variable "gcp_credentials" {
   description = "GCP service account credentials file in JSON format (needs ability to create networking, firewalls, and compute instances)"
   default = null
 }
@@ -20,7 +20,7 @@ variable "reference" {
   default     = "main"
 }
 
-variable "region" {
+variable "gcp_region" {
   description = "GCP region, e.g. us-east1"
   default     = "us-east1"
 }
