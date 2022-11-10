@@ -57,6 +57,5 @@ chown ${user}:${user} "$ZIMAGI_LOG"
 su -P - ${user} -c "$ZIMAGI_EXECUTABLE env get >>"$ZIMAGI_LOG" 2>&1"
 
 %{ endif ~}
-
 su -P - ${user} -c "$ZIMAGI_EXECUTABLE env get >>"$ZIMAGI_LOG" 2>&1"
 echo 'Zimagi startup complete' | tee -a "$ZIMAGI_LOG"
