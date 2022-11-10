@@ -53,6 +53,7 @@ su - ${user} -c "echo 'source ~/Zimagi/reactor' >> ~/.bashrc"
 ZIMAGI_EXECUTABLE="/usr/local/bin/zimagi"
 wget -O "$ZIMAGI_EXECUTABLE" "https://raw.githubusercontent.com/zimagi/zimagi/$ZIMAGI_VERSION/package/bin/zimagi" >>"$ZIMAGI_LOG" 2>&1
 chmod 755 "$ZIMAGI_EXECUTABLE"
+chown ${user}:${user} "$ZIMAGI_LOG"
 su -P - ${user} -c "$ZIMAGI_EXECUTABLE env get >>"$ZIMAGI_LOG" 2>&1"
 
 %{ endif ~}
